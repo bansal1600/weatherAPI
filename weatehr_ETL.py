@@ -118,7 +118,7 @@ def job():
             return False
 
 
-schedule.every().days.at("15:").do(job)
+schedule.every().days.at("09:00").do(job)
 # schedule.every(2).minutes.do(job)
 while True:
     schedule.run_pending()
