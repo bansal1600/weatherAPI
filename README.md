@@ -2,7 +2,7 @@
 
 WeatherAPI ETL Job
 
-* Step1 and Step 2 is scheduled for daily at 09:00 AM CST y using schedule package. 
+* Step1 and Step 2 is scheduled for daily at 09:00 AM CST using schedule package. 
 # Step1 - 
 * weatehr_ETL.py -> 
   * This will call the OpenWeatherAPI to get the weather updates for Dallas and Detroit.
