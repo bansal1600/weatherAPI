@@ -1,19 +1,16 @@
-# import sys
-# import subprocess
+import sys
+import subprocess
 
-# subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'psycopg2'])
-# subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'boto3'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'schedule'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'boto3'])
 
 import requests
 import schedule
-import time
-import datetime as dt
 import pandas as pd
 import warnings
 import datetime
 import boto3
 from botocore.exceptions import NoCredentialsError
-import psycopg2
 import json
 
 warnings.filterwarnings('ignore')
@@ -95,7 +92,6 @@ def job():
         current_date = datetime.datetime.now()
         filename = 'weather_data_' + str(current_date.day) + str(current_date.month) + str(current_date.year)
         weather_data.to_csv(str(filename + '.csv'), index=False)
-        return filename
 
 ########put the data to s3 bucket now###########
         with open('keyjson.json') as json_file:
@@ -106,7 +102,6 @@ def job():
         local_file = filename + '.csv'
         s3_file = filename + '.csv'
         bucket = 'data-openweather-api'
-        data_from_s3 = 's3_data_' + str(current_date.day) + str(current_date.month) + str(current_date.year) + ".csv"
 
         s3 = boto3.client('s3', region_name="us-east-1", aws_access_key_id=ACCESS_KEY,
                           aws_secret_access_key=SECRET_KEY, verify=False)
@@ -123,7 +118,7 @@ def job():
             return False
 
 
-schedule.every().days.at("08:00").do(job)
+schedule.every().days.at("15:").do(job)
 # schedule.every(2).minutes.do(job)
 while True:
     schedule.run_pending()
