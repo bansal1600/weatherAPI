@@ -46,7 +46,7 @@ def job():
     print(f"Beginning Data Retrieval")
     print("-" * 40)
 
-    cities = ['Dallas']
+    cities = ['Dallas', 'Detroit']
     for city in cities:
         try:
             response = requests.get(query_url + city).json()
